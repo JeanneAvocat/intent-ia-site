@@ -59,8 +59,9 @@ export function Footer() {
                 maxWidth: 280,
               }}
             >
-              Formation et implantation de configurations IA opérationnelles pour
-              avocats, juristes et notaires, par le fondateur de{" "}
+              Foudre IA suit l&apos;actualité de l&apos;intelligence artificielle
+              appliquée au droit. Un média animé par IntentIA, l&apos;offre de
+              formation et d&apos;implantation IA du fondateur de{" "}
               <a
                 href={site.jeanneAvocatUrl}
                 target="_blank"
@@ -86,18 +87,21 @@ export function Footer() {
           </div>
 
           <FooterCol
-            title="IntentIA"
+            title="Actualités"
             items={[
-              { href: "/methode", label: "Méthode" },
-              { href: "/a-propos", label: "À propos" },
-              { href: "/contact", label: "Contact" },
+              { href: "/actualites", label: "Toute l'actualité" },
+              { href: "/actualites/categorie/marche-laboratoires-ia", label: "Marché & laboratoires IA" },
+              { href: "/actualites/categorie/droit-ia", label: "Droit de l'IA" },
+              { href: "/actualites/categorie/legal-tech-outils", label: "Legal tech & outils" },
             ]}
           />
           <FooterCol
-            title="Ressources"
+            title="IntentIA"
             items={[
               { href: "/foudre-ia", label: "Newsletter Foudre IA" },
-              { href: "/blog", label: "Blog" },
+              { href: "/methode", label: "Méthode" },
+              { href: "/a-propos", label: "À propos" },
+              { href: "/contact", label: "Contact" },
             ]}
           />
 

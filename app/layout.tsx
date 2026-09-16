@@ -10,14 +10,14 @@ import { site, allKeywords } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "IntentIA · IA opérationnelle et conforme pour cabinets d'avocats",
-    template: "%s · IntentIA",
+    default: `${site.newsletterName} · L'actualité de l'IA appliquée au droit`,
+    template: "%s · " + site.newsletterName,
   },
   description:
-    "Formation et implantation de configurations IA opérationnelles pour avocats, juristes et notaires, avec conformité RGPD et AI Act intégrée, par un avocat.",
+    "Foudre IA suit l'actualité de l'intelligence artificielle appliquée au droit : marché des laboratoires IA, droit de l'IA, legal tech, cas d'usage en cabinet, mouvements et événements. Un média animé par IntentIA.",
   applicationName: site.name,
   keywords: allKeywords,
-  category: "Professional training",
+  category: "News",
   authors: [{ name: site.founder, url: `${site.url}/a-propos` }],
   creator: site.founder,
   publisher: site.name,
@@ -26,16 +26,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: site.url,
-    siteName: site.name,
-    title: "IntentIA · IA opérationnelle et conforme pour cabinets d'avocats",
+    siteName: site.newsletterName,
+    title: `${site.newsletterName} · L'actualité de l'IA appliquée au droit`,
     description:
-      "Formation et implantation de configurations IA opérationnelles pour avocats, juristes et notaires, conformité RGPD et AI Act intégrée.",
+      "Foudre IA suit l'actualité de l'intelligence artificielle appliquée au droit : marché, conformité, legal tech, cas d'usage, mouvements et événements.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "IntentIA · IA opérationnelle pour cabinets d'avocats",
+    title: `${site.newsletterName} · L'actualité de l'IA appliquée au droit`,
     description:
-      "Déploiement IA opérationnel et conforme pour avocats, juristes et notaires, par un avocat.",
+      "Marché des laboratoires IA, droit de l'IA, legal tech, cas d'usage en cabinet, mouvements et événements.",
   },
   robots: {
     index: true,

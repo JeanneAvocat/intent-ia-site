@@ -2,70 +2,62 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon, type IconName } from "./Icon";
 
-/* ---- Logo : mark éclair + nom serif + mono -------------------------------
-   Le mark est un éclair stylisé (référence directe à "Foudre IA"), pas le
-   monogramme "j" de Jeanne Avocat : identité visuelle volontairement propre. */
+/* ---- Logo : mark éclair + nom du média en serif fort ---------------------
+   Masthead de presse : "Foudre IA" est le nom du média (le nom qui apparaît
+   en haut de chaque page comme le nom d'un journal), "IntentIA" reste la
+   marque/l'offre de services, rappelée en petit à droite. Mark éclair
+   distinct du monogramme "j" de Jeanne Avocat. */
 export function Logo({
   dark = false,
   scale = 1,
-  mono = "IA",
+  showBrand = true,
 }: {
   dark?: boolean;
   scale?: number;
-  mono?: string;
+  showBrand?: boolean;
 }) {
   const markColor = dark ? "#F5ECD8" : "#C6891F";
-  const nameColor = dark ? "#EEF0F4" : "#14131F";
-  const subColor = dark ? "#A5A3B8" : "#6F6D82";
+  const nameColor = dark ? "#EEF0EE" : "#15171A";
+  const subColor = dark ? "#90939A" : "#585B5F";
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 11 * scale }}>
       <svg
-        width={30 * scale}
-        height={38 * scale}
+        width={26 * scale}
+        height={34 * scale}
         viewBox="0 0 30 38"
         fill="none"
         aria-hidden="true"
       >
-        <path
-          d="M17 2 L7 20 H14 L12 36 L23 16 H16 Z"
-          fill={markColor}
-        />
+        <path d="M17 2 L7 20 H14 L12 36 L23 16 H16 Z" fill={markColor} />
       </svg>
-      <span style={{ display: "inline-flex", alignItems: "baseline", gap: 8 * scale }}>
+      <span style={{ display: "inline-flex", flexDirection: "column", lineHeight: 1 }}>
         <span
           style={{
             fontFamily: "var(--serif)",
-            fontSize: 23 * scale,
-            fontWeight: 500,
-            color: nameColor,
-            letterSpacing: "0.004em",
-          }}
-        >
-          Intent
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--mono)",
-            fontSize: 15 * scale,
+            fontSize: 24 * scale,
             fontWeight: 600,
-            color: markColor,
-            letterSpacing: "0.01em",
+            fontStyle: "italic",
+            color: nameColor,
+            letterSpacing: "-0.005em",
           }}
         >
-          IA
+          Foudre IA
         </span>
-        <span
-          style={{
-            fontFamily: "var(--mono)",
-            fontSize: 9.5 * scale,
-            fontWeight: 500,
-            color: subColor,
-            letterSpacing: "0.14em",
-            marginLeft: 2,
-          }}
-        >
-          {mono}
-        </span>
+        {showBrand && (
+          <span
+            style={{
+              fontFamily: "var(--mono)",
+              fontSize: 9.5 * scale,
+              fontWeight: 500,
+              color: subColor,
+              letterSpacing: "0.13em",
+              textTransform: "uppercase",
+              marginTop: 2 * scale,
+            }}
+          >
+            par IntentIA
+          </span>
+        )}
       </span>
     </span>
   );

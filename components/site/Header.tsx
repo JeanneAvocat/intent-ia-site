@@ -7,10 +7,15 @@ import { Icon } from "./Icon";
 import { Logo, Button } from "./primitives";
 import { cta } from "@/lib/site";
 
+/**
+ * Navigation : "Actualités" en premier, l'offre de services (Méthode, À
+ * propos) reste accessible mais en second plan, après le média. Foudre IA
+ * (newsletter) reste visible car c'est l'entrée de conversion du média.
+ */
 const NAV: { href: string; label: string }[] = [
-  { href: "/methode", label: "Méthode" },
-  { href: "/foudre-ia", label: "Foudre IA" },
-  { href: "/blog", label: "Blog" },
+  { href: "/actualites", label: "Actualités" },
+  { href: "/foudre-ia", label: "Newsletter" },
+  { href: "/methode", label: "Services" },
   { href: "/a-propos", label: "À propos" },
 ];
 
@@ -39,19 +44,18 @@ export function Header() {
         top: 0,
         zIndex: 40,
         background: "var(--paper)",
-        borderBottom: "1px solid var(--line)",
       }}
     >
       <div
         className="container"
         style={{
-          height: 72,
+          height: 76,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <Link href="/" aria-label="IntentIA, accueil" style={{ padding: 0 }}>
+        <Link href="/" aria-label="Foudre IA, accueil" style={{ padding: 0 }}>
           <Logo />
         </Link>
 
@@ -71,6 +75,8 @@ export function Header() {
           <Icon name={openMobile ? "x" : "menu"} size={22} />
         </button>
       </div>
+
+      <div className="ia-masthead-rule" />
 
       {openMobile && (
         <div className="nav-mobile">

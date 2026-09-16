@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 /* ============================================================================
-   IntentIA — design tokens
-   Light mode only. Direction "ciel d'orage + éclair" : fond ardoise froid,
-   accent doré fulgur (la fulguration de Foudre IA), typographie serif sobre +
-   sans lisible + signal monospace technique. Palette VOLONTAIREMENT distincte
-   de Jeanne Avocat (parchemin chaud + sienne) : même méthode, identité propre.
+   Foudre IA (média IntentIA) — design tokens
+   Light mode only. Direction "presse d'atelier" : papier gris-neutre froid,
+   encre quasi noire, accent doré fulgur dosé au filet et à la légende (la
+   fulguration de Foudre IA). Grille éditoriale dense, filets fins, PAS de
+   cartes flottantes ni d'ombres. Palette VOLONTAIREMENT distincte de Jeanne
+   Avocat (parchemin chaud + sienne, Newsreader + IBM Plex Sans) : même
+   méthode de design tokens, identité entièrement propre.
    Règles dures (charte du fondateur) :
      - Aucun emoji. Aucun tiret cadratin. Point médian (·), deux-points ou tiret.
      - AUCUNE ombre portée, glow, néon, 3D. Élévation = bordure + surface.
@@ -15,14 +17,14 @@
      - AUCUN prix affiché nulle part sur le site.
    ========================================================================== */
 :root {
-  /* ---- Color · neutrals (ardoise froide, PAS le parchemin de Jeanne) --- */
-  --paper: #eef0f4;
-  --paper-2: #e6e9f0;
-  --surface: #fbfbfd;
-  --ink: #14131f;
-  --ink-deep: #0d0c16;
-  --gres: #6f6d82;
-  --gres-soft: #a5a3b8;
+  /* ---- Color · neutrals (gris papier froid, PAS le parchemin de Jeanne) - */
+  --paper: #eef0ee;
+  --paper-2: #e4e7e2;
+  --surface: #ffffff;
+  --ink: #15171a;
+  --ink-deep: #0a0b0d;
+  --gres: #585b5f;
+  --gres-soft: #90939a;
 
   /* ---- Color · accent (fulgur : doré électrique, l'éclair de Foudre IA) - */
   --fulgur: #c6891f;
@@ -31,18 +33,21 @@
   --fulgur-wash: #f5ecd8;
 
   /* ---- Color · lines & borders (aucune ombre permise) ------------------ */
-  --line: rgba(20, 19, 31, 0.12);
-  --line-strong: rgba(20, 19, 31, 0.22);
+  --line: rgba(10, 11, 13, 0.13);
+  --line-strong: rgba(10, 11, 13, 0.26);
   --line-dark: rgba(255, 255, 255, 0.14);
 
   /* ---- Color · status (sobre, dosé) ----------------------------------- */
   --ok: #3f6b4f;
   --warn: var(--fulgur);
 
-  /* ---- Typography · familles (auto-hébergées via next/font) ------------ */
-  --serif: var(--font-spectral), Georgia, "Times New Roman", serif;
-  --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+  /* ---- Typography · familles (auto-hébergées via next/font) ------------
+     Fraunces (titres, serif éditorial à fort caractère) + Public Sans (corps,
+     lisibilité longue durée) + JetBrains Mono (rubriques/dates/légendes).
+     Choix distinct à la fois de Jeanne Avocat et de la V1 d'IntentIA. ------ */
+  --serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --sans: var(--font-public-sans), system-ui, -apple-system, sans-serif;
+  --mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
 
   /* ---- Typography · échelle fluide (clamp mobile -> desktop) ----------- */
   --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
@@ -633,6 +638,167 @@ a.ia-arrow:hover {
     padding-top: 44px !important;
     padding-bottom: 44px !important;
   }
+}
+
+/* ===========================================================================
+   Média — bandeau catégories, fil d'articles, article vedette
+   Grille éditoriale dense : filets fins entre les lignes, PAS de cartes
+   flottantes ni d'ombres. Le rythme visuel vient de la typographie et des
+   séparateurs, pas de surfaces isolées.
+   ========================================================================= */
+.ia-kicker {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fulgur-deep);
+  text-decoration: none;
+}
+.ia-kicker:hover {
+  color: var(--ink);
+}
+
+/* Bandeau de rubriques horizontal, défilable sur mobile */
+.ia-category-rail {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ia-category-rail::-webkit-scrollbar {
+  display: none;
+}
+.ia-category-pill {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 8px 13px;
+  color: var(--gres);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.ia-category-pill:hover {
+  color: var(--ink);
+}
+.ia-category-pill--on {
+  color: var(--fulgur-deep);
+  border-color: var(--fulgur);
+}
+
+/* Une ligne du fil d'actualité : rangée dense séparée par un filet, PAS une
+   carte. Le survol souligne le titre, jamais d'ombre ni d'élévation. */
+.ia-feed {
+  border-top: 1px solid var(--line);
+}
+.ia-feed-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+}
+.ia-feed-row:hover .ia-feed-title {
+  color: var(--fulgur-deep);
+}
+.ia-feed-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--gres-soft);
+  padding-top: 4px;
+}
+.ia-feed-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.28;
+  color: var(--ink);
+  transition: color var(--dur) var(--ease);
+  margin: 0 0 8px;
+}
+.ia-feed-summary {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--gres);
+  margin: 0;
+  max-width: 640px;
+}
+@media (max-width: 640px) {
+  .ia-feed-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* Article vedette (haut de la page d'accueil / des listings) : plus grand,
+   toujours au-dessus d'un filet, jamais de carte flottante. */
+.ia-lead-story {
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 40px;
+  margin-bottom: 8px;
+}
+.ia-lead-story-title {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 1.3rem + 2vw, 2.9rem);
+  line-height: 1.12;
+  color: var(--ink);
+  margin: 16px 0 18px;
+}
+.ia-lead-story-title:hover {
+  color: var(--fulgur-deep);
+}
+
+/* Rubriques secondaires : bloc "à la une" en 3 colonnes séparées par filets
+   verticaux (pas de cartes). */
+.ia-rail-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.ia-rail-3 > * {
+  padding: 0 28px;
+  border-left: 1px solid var(--line);
+}
+.ia-rail-3 > *:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+@media (max-width: 1000px) {
+  .ia-rail-3 {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .ia-rail-3 > * {
+    padding: 24px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+  .ia-rail-3 > *:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+/* Masthead : nom du média en grand, filet double façon journal */
+.ia-masthead-rule {
+  border-top: 3px double var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding: 6px 0;
+}
+
+/* Provenance : bandeau discret pour les articles provisoires (pas une
+   "carte" flottante, un simple bloc à filet gauche épais). */
+.ia-provisional {
+  border-left: 3px solid var(--fulgur);
+  padding: 10px 16px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--gres);
+  background: var(--paper-2);
 }
 
 /* ===========================================================================

@@ -17,9 +17,11 @@
 export const site = {
   name: "IntentIA",
   // Raison sociale exacte de la structure qui porte IntentIA.
-  // TODO (Hugo) : confirmer le libellé (société distincte de l'exercice
-  // d'avocat, ou activité connexe du même cabinet ? à trancher avant mise en ligne).
-  legalName: "IntentIA : activité de formation et de conseil en IA d'Hugo Salard",
+  // Statut retenu par défaut (brief fondateur) : IntentIA est une activité
+  // connexe à l'exercice d'avocat individuel d'Hugo Salard, PAS une société
+  // distincte. TODO (Hugo) : confirmer ce statut auprès de l'Ordre avant mise
+  // en ligne (activités accessoires d'un avocat, RIN) et ajuster si besoin.
+  legalName: "IntentIA, activité connexe à l'exercice d'avocat individuel d'Hugo Salard",
   // URL de production (sans slash final). Surchargée par NEXT_PUBLIC_SITE_URL.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://intent-ia.com",
   locale: "fr-FR",
@@ -67,7 +69,7 @@ export const site = {
   // Déclaration d'entité factuelle, reprise telle quelle dans le schema et
   // llms.txt.
   entity:
-    "IntentIA est l'offre de formation et d'implantation de configurations d'intelligence artificielle opérationnelles pour les avocats, juristes, notaires et professions réglementées voisines, fondée par Hugo Salard, avocat au Barreau de Paris et fondateur de Jeanne Avocat, premier cabinet d'affaires IA-natif de France. IntentIA accompagne les cabinets et directions juridiques dans le déploiement d'IA conforme au RGPD et à l'AI Act, avec une légitimité d'avocat sur les enjeux de conformité.",
+    "IntentIA est l'offre de formation et d'implantation de configurations d'intelligence artificielle opérationnelles pour les avocats, juristes, notaires et professions réglementées voisines, fondée par Hugo Salard, avocat au Barreau de Paris et fondateur de Jeanne Avocat, premier cabinet d'affaires IA-natif de France. IntentIA anime Foudre IA, un média d'actualités sur l'intelligence artificielle appliquée au droit, et accompagne les cabinets et directions juridiques dans le déploiement d'IA conforme au RGPD et à l'AI Act, avec une légitimité d'avocat sur les enjeux de conformité.",
 
   // AUCUN PRIX affiché sur ce site. Ne pas ajouter de priceRange ici.
 

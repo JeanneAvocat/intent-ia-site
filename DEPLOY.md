@@ -71,11 +71,14 @@ le déploiement auto au push GitHub. La voie GitHub ci-dessus est préférable.
 - Trancher la structure juridique qui porte IntentIA et compléter
   `lib/site.ts` (adresse, email, téléphone, `legalName`, `foundingDate`)
   ainsi que les pages `/mentions-legales` et `/confidentialite` (marquées
-  "À VÉRIFIER PAR HUGO").
-- Brancher un vrai canal de contact (email dédié ou formulaire) et un ESP
-  pour la newsletter Foudre IA, à la place des mailto de secours.
-- Valider les 3 articles de blog `provisional: true` (passer à `false`)
-  ou les remplacer par du contenu réel.
+  "À VÉRIFIER PAR HUGO"). Statut retenu par défaut : activité connexe à
+  l'exercice d'avocat individuel d'Hugo Salard, à confirmer auprès de l'Ordre.
+- Brancher un vrai canal de contact (email dédié ou formulaire) et,
+  éventuellement, un ESP pour la newsletter Foudre IA (Beehiiv en cours
+  d'arrêt côté Hugo : le formulaire mailto de repli reste donc en place pour
+  l'instant), à la place des mailto de secours.
+- Valider les articles de démonstration `provisional: true` (passer à
+  `false`) ou les remplacer par du contenu réel, rubrique par rubrique.
 - Remplacer le DNS du domaine `intent-ia.com` (actuellement une landing page
   Lovable) pour pointer vers Clever Cloud.
 - Vérifier le rendu du schema (Rich Results Test de Google) et l'absence de

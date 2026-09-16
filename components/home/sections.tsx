@@ -1,65 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/site/Icon";
-import {
-  Eyebrow,
-  Button,
-  ArrowLink,
-  SectionHead,
-} from "@/components/site/primitives";
-import { site } from "@/lib/site";
+import { Eyebrow, SectionHead } from "@/components/site/primitives";
+import { site, cta } from "@/lib/site";
 
 /* ===========================================================================
-   Section 2 — Bandeau de confiance (encre profonde)
-   ========================================================================= */
-export function TrustBand() {
-  const items = [
-    "Conforme RGPD et AI Act",
-    "Porté par un avocat inscrit au Barreau de Paris",
-    "Secret professionnel et confidentialité par conception",
-    "Déploiement opérationnel, pas seulement une formation théorique",
-  ];
-  return (
-    <section className="section--dark" style={{ paddingTop: 28, paddingBottom: 28 }}>
-      <div
-        className="container"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: 16,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            gap: 18,
-            flexWrap: "wrap",
-            alignItems: "center",
-            color: "var(--paper)",
-            fontSize: 14.5,
-          }}
-        >
-          {items.map((t, i) => (
-            <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <Icon name="shield" size={17} color="var(--fulgur-soft)" />
-                {t}
-              </span>
-              {i < items.length - 1 && (
-                <span style={{ color: "var(--fulgur-soft)" }}>·</span>
-              )}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ===========================================================================
-   Section 2 bis — Pour qui (4 tuiles)
+   Section — Pour qui (4 tuiles). Utilisée sur /methode.
    ========================================================================= */
 const AUDIENCES: { icon: IconName; t: string; d: string; href: string }[] = [
   {
@@ -139,7 +84,7 @@ export function Audiences() {
 }
 
 /* ===========================================================================
-   Section 3/4 — Le constat et la promesse
+   Section — Le constat et la promesse. Utilisée sur /methode.
    ========================================================================= */
 export function ConstatPromesse() {
   return (
@@ -170,7 +115,8 @@ export function ConstatPromesse() {
 }
 
 /* ===========================================================================
-   Section 5 — La méthode en 3 étapes
+   Section — La méthode en 3 étapes. Utilisée sur /methode (et l'accueil V1,
+   conservée ici pour compatibilité du composant).
    ========================================================================= */
 const STEPS: { icon: IconName; t: string; d: string }[] = [
   {
@@ -226,7 +172,7 @@ export function Steps({ num = "05" }: { num?: string }) {
 }
 
 /* ===========================================================================
-   Section 6 — Ce que vous obtenez
+   Section — Ce que vous obtenez. Utilisée sur /methode.
    ========================================================================= */
 const BENEFITS: { icon: IconName; t: string; d: string }[] = [
   {
@@ -275,7 +221,7 @@ export function Benefits() {
 }
 
 /* ===========================================================================
-   Section 7 — Mes engagements
+   Section — Mes engagements. Utilisée sur /methode.
    ========================================================================= */
 export function Commitments() {
   const items = [
@@ -322,125 +268,45 @@ export function Commitments() {
 }
 
 /* ===========================================================================
-   Section 8 — Teaser newsletter Foudre IA (encre profonde)
+   Section — Bandeau services (accueil du média). Volontairement discret :
+   une seule bande, pas un hero de vente, pas de tuiles ni d'illustration.
+   L'accueil est un fil d'actualités ; l'offre IntentIA reste accessible mais
+   au second plan, ici sous forme d'un simple bandeau de bas de page.
    ========================================================================= */
-export function NewsletterTeaser() {
+export function ServicesTeaser() {
   return (
-    <section className="section section--dark">
+    <section className="section--dark" style={{ paddingTop: 48, paddingBottom: 48 }}>
       <div
-        className="container grid split"
-        style={{ ["--cols" as string]: "1.2fr 0.8fr", gap: 48, alignItems: "center" }}
+        className="container"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 24,
+          flexWrap: "wrap",
+        }}
       >
         <div>
-          <Eyebrow num="08" dark>
-            {site.newsletterName}
-          </Eyebrow>
-          <h2 className="ia-h2" style={{ color: "var(--paper)", margin: "16px 0 14px" }}>
-            La newsletter IA et droit, chaque semaine.
-          </h2>
-          <p
-            className="ia-lead"
-            style={{ color: "var(--gres-soft)", maxWidth: 520, marginBottom: 28 }}
-          >
-            {site.newsletterTagline}
+          <div className="ia-kicker" style={{ color: "var(--fulgur-soft)", marginBottom: 10 }}>
+            IntentIA
+          </div>
+          <p className="ia-h3" style={{ color: "var(--paper)", margin: 0, maxWidth: 560 }}>
+            Foudre IA est animé par IntentIA, l&apos;offre de formation et
+            d&apos;implantation d&apos;IA d&apos;{site.founder} pour les cabinets
+            d&apos;avocats, juristes et notaires.
           </p>
-          <Button variant="dark" href="/foudre-ia" iconRight="arrowRight">
-            S&apos;inscrire à {site.newsletterName}
-          </Button>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {(
-            [
-              ["Actus IA et droit", "chaque semaine"],
-              ["Skills et agents testés", "en exclusivité"],
-            ] as const
-          ).map(([t, p], i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
-                padding: "16px 18px",
-                border: "1px solid var(--line-dark)",
-                borderRadius: 10,
-              }}
-            >
-              <span style={{ color: "var(--paper)", fontWeight: 500 }}>{t}</span>
-              <span style={{ fontFamily: "var(--serif)", fontSize: 18, color: "var(--fulgur-soft)" }}>
-                {p}
-              </span>
-            </div>
-          ))}
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <Link href="/methode" className="ia-btn ia-btn--ghostdark ia-btn--sm">
+            Découvrir la méthode
+          </Link>
+          <Link href="/contact" className="ia-btn ia-btn--dark ia-btn--sm">
+            {cta.primary}
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-/* ===========================================================================
-   Section 9 — À propos en court
-   ========================================================================= */
-export function AboutShort() {
-  return (
-    <section className="section">
-      <div
-        className="container grid split split--imgfirst"
-        style={{ ["--cols" as string]: "0.8fr 1.2fr", gap: 48, alignItems: "center" }}
-      >
-        <Image
-          className="split-img"
-          src="/assets/hugo-salard.png"
-          alt="Hugo Salard"
-          width={750}
-          height={750}
-          sizes="(max-width: 1000px) 70vw, 380px"
-          style={{ display: "block", width: "100%", maxWidth: 380, height: "auto", margin: "0 auto" }}
-        />
-        <div>
-          <Eyebrow num="09">À propos</Eyebrow>
-          <p className="ia-h2" style={{ fontFamily: "var(--serif)", margin: "16px 0 20px" }}>
-            Un avocat qui a construit ce qu&apos;il vous propose.
-          </p>
-          <p className="ia-body" style={{ color: "var(--gres)", maxWidth: 560, marginBottom: 24 }}>
-            Hugo Salard est avocat au Barreau de Paris et fondateur de Jeanne
-            Avocat, premier cabinet d&apos;affaires IA-natif de France. Il n&apos;enseigne
-            pas une théorie : il a déployé cette méthode dans son propre cabinet
-            avant de la proposer aux vôtres.
-          </p>
-          <ArrowLink href="/a-propos">En savoir plus</ArrowLink>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-/* FAQ de l'accueil. Le JSON-LD FAQPage est généré côté page.
-   Contenu écrit dans la voix de la marque, à valider par Hugo avant mise en
-   ligne : réponses courtes et autoportantes. AUCUN prix n'est mentionné. */
-export const HOME_FAQ = [
-  {
-    q: "IntentIA est-il lié à Jeanne Avocat ?",
-    a: "Le fondateur est le même, Hugo Salard, avocat au Barreau de Paris. Mais IntentIA est une marque et une offre séparées : la formation et l'implantation d'IA pour d'autres cabinets, avocats, juristes et notaires, distincte de l'exercice du droit chez Jeanne Avocat.",
-  },
-  {
-    q: "Combien coûte l'accompagnement ?",
-    a: "Cela dépend de la taille de votre structure et du périmètre du déploiement. Contactez-moi pour en discuter : je préfère cadrer votre besoin avant de parler chiffres.",
-  },
-  {
-    q: "Mes données et celles de mes clients restent-elles confidentielles ?",
-    a: "C'est le point de départ de la méthode : secret professionnel, confidentialité par conception, choix d'architectures qui ne réutilisent pas vos données pour entraîner des modèles tiers.",
-  },
-  {
-    q: "Faut-il déjà utiliser l'IA dans mon cabinet ?",
-    a: "Non. La méthode s'adapte aux cabinets qui démarrent de zéro comme à ceux qui ont déjà des usages dispersés à cadrer et à sécuriser.",
-  },
-  {
-    q: "Qu'est-ce que Foudre IA ?",
-    a: "La newsletter hebdomadaire associée à IntentIA : actualités de l'écosystème IA et droit, cas d'usage, automatisations, et en exclusivité les skills et agents testés par Hugo.",
-  },
-  {
-    q: "L'accompagnement s'adresse-t-il aux notaires ?",
-    a: "Oui. La méthode vise les avocats, juristes et notaires, ainsi que les professions réglementées voisines qui partagent des contraintes de confidentialité et de déontologie proches.",
-  },
-];

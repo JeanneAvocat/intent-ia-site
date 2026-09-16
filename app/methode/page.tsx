@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/site/PageHero";
-import { Steps } from "@/components/home/sections";
+import Image from "next/image";
+import {
+  Audiences,
+  ConstatPromesse,
+  Steps,
+  Benefits,
+  Commitments,
+} from "@/components/home/sections";
 import { PromiseList } from "@/components/site/inner";
 import { CTAFinal } from "@/components/site/CTAFinal";
-import { SectionHead } from "@/components/site/primitives";
+import { SectionHead, Button } from "@/components/site/primitives";
 import { Icon, type IconName } from "@/components/site/Icon";
 import { JsonLd } from "@/components/site/JsonLd";
 import { aboutPage, breadcrumb } from "@/lib/jsonld";
+import { cta } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Méthode : déployer l'IA dans un cabinet, en conformité",
@@ -50,17 +57,56 @@ export default function MethodePage() {
           ]),
         ]}
       />
-      <PageHero
-        eyebrow="Méthode"
-        title="Comment on déploie l'IA dans votre cabinet."
-        lead="Une méthode qui associe déploiement opérationnel, conformité intégrée et légitimité d'avocat. Aucun prix n'est affiché ici : chaque périmètre se cadre avec vous."
-      />
-      <Steps num="02" />
+      <section style={{ borderBottom: "1px solid var(--line)" }}>
+        <div
+          className="container grid split"
+          style={{
+            ["--cols" as string]: "1.2fr 0.9fr",
+            gap: 56,
+            alignItems: "center",
+            paddingTop: 56,
+            paddingBottom: 56,
+          }}
+        >
+          <div>
+            <div className="ia-kicker" style={{ marginBottom: 16, display: "block" }}>
+              IntentIA · formation et implantation
+            </div>
+            <h1 className="ia-h1" style={{ margin: "0 0 22px", maxWidth: 640 }}>
+              Comment on déploie l&apos;IA dans votre cabinet.
+            </h1>
+            <p className="ia-lead" style={{ margin: "0 0 30px", maxWidth: 520 }}>
+              Une méthode qui associe déploiement opérationnel, conformité
+              intégrée et légitimité d&apos;avocat. Aucun prix n&apos;est affiché
+              ici : chaque périmètre se cadre avec vous.
+            </p>
+            <Button href="/contact" iconRight="arrowRight">
+              {cta.primary}
+            </Button>
+          </div>
+          <div>
+            <Image
+              src="/assets/hugo-salard.png"
+              alt="Hugo Salard, avocat au Barreau de Paris, fondateur d'IntentIA"
+              width={750}
+              height={750}
+              priority
+              sizes="(max-width: 1000px) 70vw, 380px"
+              style={{ display: "block", width: "100%", maxWidth: 380, height: "auto", margin: "0 auto" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <Audiences />
+      <ConstatPromesse />
+      <Steps num="05" />
+      <Benefits />
 
       <section className="section">
         <div className="container">
           <SectionHead
-            num="03"
+            num="06"
             eyebrow="Ce sur quoi je m'engage"
             title="Ce sur quoi je m'engage, noir sur blanc."
           />
@@ -91,10 +137,12 @@ export default function MethodePage() {
         </div>
       </section>
 
+      <Commitments />
+
       <section className="section section--dark">
         <div className="container">
           <SectionHead
-            num="04"
+            num="07"
             eyebrow="Vos garanties"
             title="La rigueur d'un avocat, appliquée à l'IA."
             dark

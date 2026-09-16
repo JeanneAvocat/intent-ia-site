@@ -88,20 +88,19 @@ export default function MentionsLegalesPage() {
           <Todo>
             Cette page a été rédigée par analogie avec les mentions légales de
             jeanne-avocat.com, SANS reprendre ses données d&apos;identité
-            (adresse, SIRET, assurance). Aucune de ces données n&apos;est
-            réutilisable pour IntentIA sans vérification : IntentIA peut être
-            une structure juridique différente (société commerciale distincte
-            de l&apos;exercice d&apos;avocat, ou activité connexe du même
-            cabinet). Trancher ce point avant publication, puis remplacer les
-            champs ci-après.
+            (adresse, SIRET, assurance). Le statut retenu par défaut ici est
+            celui d&apos;une activité connexe à l&apos;exercice d&apos;avocat
+            individuel d&apos;Hugo Salard (pas une société distincte) : à
+            confirmer auprès de l&apos;Ordre avant publication, puis à
+            remplacer les champs ci-après.
           </Todo>
 
           <H2>1. Éditeur du site</H2>
           <P>
-            Le présent site est édité par [RAISON SOCIALE À CONFIRMER —
-            structure porteuse d&apos;IntentIA], [forme juridique à préciser :
-            entreprise individuelle, société, ou activité connexe de
-            l&apos;exercice d&apos;avocat de Maître Hugo Salard].
+            Le présent site est édité par Maître Hugo Salard, avocat au
+            Barreau de Paris, dans le cadre d&apos;une activité connexe à son
+            exercice individuel d&apos;avocat [statut à confirmer auprès de
+            l&apos;Ordre avant publication].
           </P>
           <UL
             items={[
@@ -121,11 +120,12 @@ export default function MentionsLegalesPage() {
             IntentIA est une offre de formation et d&apos;implantation de
             configurations d&apos;intelligence artificielle pour les avocats,
             juristes, notaires et professions réglementées voisines. IntentIA
-            n&apos;exerce pas d&apos;activité d&apos;avocat et ne constitue pas
-            un cabinet d&apos;avocats : cette activité est distincte de celle
-            de{" "}
-            <Ext href="https://jeanne-avocat.com">Jeanne Avocat</Ext>, cabinet
-            d&apos;avocats fondé par la même personne.
+            anime également Foudre IA, un média d&apos;actualités sur
+            l&apos;intelligence artificielle appliquée au droit. IntentIA est
+            une activité connexe à l&apos;exercice d&apos;avocat individuel de
+            Maître Hugo Salard, distincte de l&apos;activité d&apos;avocat
+            exercée au sein de{" "}
+            <Ext href="https://jeanne-avocat.com">Jeanne Avocat</Ext>.
           </P>
           <Todo>
             Vérifier que cette formulation est conforme aux règles

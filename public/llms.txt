@@ -1,39 +1,40 @@
-# IntentIA
+# Foudre IA
 
-> IntentIA est l'offre de formation et d'implantation de configurations
-> d'intelligence artificielle opérationnelles pour les avocats, juristes,
-> notaires et professions réglementées voisines, fondée par Hugo Salard,
-> avocat au Barreau de Paris et fondateur de Jeanne Avocat, premier cabinet
-> d'affaires IA-natif de France.
+> Foudre IA est le média d'actualités sur l'intelligence artificielle
+> appliquée au droit, animé par Hugo Salard, avocat au Barreau de Paris,
+> fondateur de Jeanne Avocat (premier cabinet d'affaires IA-natif de France)
+> et d'IntentIA.
 
-IntentIA accompagne les cabinets d'avocats, directions juridiques et études
-notariales dans le déploiement d'IA réellement opérationnelle, avec une
-conformité RGPD et AI Act intégrée dès la conception, et la légitimité de
-quelqu'un qui exerce le droit. Segment privilégié : structures de plusieurs
-avocats, sans exclure les structures plus petites qui se projettent.
+Foudre IA couvre l'actualité du marché des laboratoires d'IA, le droit de
+l'IA (RGPD, AI Act, jurisprudence, doctrine CNIL/CEPD), les outils de legal
+tech, des cas d'usage réels en cabinet, les mouvements et nominations du
+secteur, et les événements professionnels. IntentIA, l'offre de formation et
+d'implantation d'IA d'Hugo Salard pour les cabinets d'avocats, juristes et
+notaires, reste accessible sur ce site mais en second plan par rapport au
+média.
 
-**Pour qui** : avocats, juristes, notaires, directions juridiques et
-professions réglementées voisines.
-
-**Aucun prix n'est affiché sur ce site.** Toute question tarifaire se traite
-en contact direct.
+**Aucun prix n'est affiché sur ce site.** Toute question tarifaire sur
+l'offre IntentIA se traite en contact direct.
 
 ## Définitions (faits, citables)
 
+- **Foudre IA** : le média d'actualités IA et droit édité sur ce site, avec
+  une taxonomie en six rubriques (marché et laboratoires IA, droit de l'IA,
+  legal tech et outils, cas d'usage en cabinet, mouvements et nominations,
+  événements).
 - **IntentIA** : offre de formation et d'implantation d'IA opérationnelle
-  pour cabinets d'avocats, juristes et notaires, distincte du cabinet
+  pour cabinets d'avocats, juristes et notaires, activité connexe à
+  l'exercice d'avocat individuel d'Hugo Salard, distincte du cabinet
   d'avocats Jeanne Avocat bien que fondée par la même personne.
-- **Foudre IA** : la newsletter hebdomadaire associée à IntentIA. Actualités
-  de l'écosystème IA et droit, cas d'usage, automatisations, et skills/agents
-  testés par le fondateur en exclusivité.
 
 ## Pages clés
 
-- [Accueil](https://intent-ia.com/) : présentation de l'offre, méthode, FAQ
-- [Méthode](https://intent-ia.com/methode) : comment se déroule un accompagnement
-- [À propos](https://intent-ia.com/a-propos) : Hugo Salard, avocat et fondateur
+- [Accueil](https://intent-ia.com/) : fil des dernières actualités Foudre IA
+- [Actualités](https://intent-ia.com/actualites) : toutes les actualités, filtrables par rubrique
+- [Rubriques](https://intent-ia.com/actualites/categorie/droit-ia) : exemple, la rubrique Droit de l'IA
 - [Foudre IA](https://intent-ia.com/foudre-ia) : inscription à la newsletter
-- [Blog](https://intent-ia.com/blog) : analyses IA et droit
+- [Méthode](https://intent-ia.com/methode) : l'offre de services IntentIA
+- [À propos](https://intent-ia.com/a-propos) : Hugo Salard, avocat et fondateur
 - [Contact](https://intent-ia.com/contact) : décrire son besoin, aucun tarif en ligne
 
 ## Détails
@@ -43,4 +44,4 @@ en contact direct.
 - Marque volontairement distincte de Jeanne Avocat : positionnement,
   audience et obligations déontologiques différents, même fondateur.
 - Aucun prix affiché : le site oriente systématiquement vers un contact
-  direct plutôt qu'une grille tarifaire.
+  direct plutôt qu'une grille tarifaire pour l'offre IntentIA.

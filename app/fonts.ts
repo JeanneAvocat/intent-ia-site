@@ -1,36 +1,47 @@
-import { Spectral, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Fraunces, Public_Sans, JetBrains_Mono } from "next/font/google";
 
 /**
- * Polices auto-hébergées. `next/font/google` télécharge les fichiers au build et
- * les sert depuis notre domaine : aucune requête vers Google au runtime, conforme
- * à l'exigence de souveraineté. `display: swap` + préchargement gérés par Next.
- * Chaque police expose une variable CSS, consommée par les tokens dans globals.css.
+ * Polices auto-hébergées. `next/font/google` télécharge les fichiers au build
+ * et les sert depuis notre domaine : aucune requête vers Google au runtime,
+ * conforme à l'exigence de souveraineté. `display: swap` géré par Next.
  *
- * Choix distinct de Jeanne Avocat (Newsreader + IBM Plex Sans) : Spectral pour
- * le serif (plus contemporain, moins "cabinet traditionnel"), Inter pour le
- * texte courant (très lisible, référence produit tech), IBM Plex Mono conservé
- * pour le signal technique (cohérent avec l'ADN IA du site).
+ * Choix radicalement distinct de jeanne-avocat.com (Newsreader + IBM Plex
+ * Sans) ET de la première itération d'IntentIA (Spectral + Inter + IBM Plex
+ * Mono), pour donner à Foudre IA une identité de presse forte et reconnaissable :
+ *
+ * - Fraunces (titres) : un serif éditorial à fort caractère, optical sizing
+ *   variable, taillé pour de grands titres de presse. Beaucoup plus marqué
+ *   qu'un serif "corporate" générique, sans tomber dans le décoratif.
+ * - Public Sans (corps de texte) : dessiné pour la lecture dense de contenu
+ *   éditorial (c'est la police du design system du gouvernement américain,
+ *   pensée pour l'accessibilité et la lisibilité longue durée), délibérément
+ *   différente d'Inter qui est devenu le choix par défaut de tous les
+ *   templates produit/SaaS générés par IA.
+ * - JetBrains Mono (métadonnées : rubriques, dates, labels) : signal
+ *   "rédaction/atelier", distinct de la famille IBM Plex déjà utilisée par
+ *   Jeanne Avocat.
  */
-export const spectral = Spectral({
+export const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "variable",
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
   display: "swap",
-  variable: "--font-spectral",
+  variable: "--font-fraunces",
 });
 
-export const inter = Inter({
+export const publicSans = Public_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-public-sans",
 });
 
-export const plexMono = IBM_Plex_Mono({
+export const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-plex-mono",
+  variable: "--font-jetbrains-mono",
 });
 
-export const fontVariables = `${spectral.variable} ${inter.variable} ${plexMono.variable}`;
+export const fontVariables = `${fraunces.variable} ${publicSans.variable} ${jetbrainsMono.variable}`;
