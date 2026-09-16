@@ -1,0 +1,652 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   IntentIA — design tokens
+   Light mode only. Direction "ciel d'orage + éclair" : fond ardoise froid,
+   accent doré fulgur (la fulguration de Foudre IA), typographie serif sobre +
+   sans lisible + signal monospace technique. Palette VOLONTAIREMENT distincte
+   de Jeanne Avocat (parchemin chaud + sienne) : même méthode, identité propre.
+   Règles dures (charte du fondateur) :
+     - Aucun emoji. Aucun tiret cadratin. Point médian (·), deux-points ou tiret.
+     - AUCUNE ombre portée, glow, néon, 3D. Élévation = bordure + surface.
+     - Contraste AA minimum.
+     - AUCUN prix affiché nulle part sur le site.
+   ========================================================================== */
+:root {
+  /* ---- Color · neutrals (ardoise froide, PAS le parchemin de Jeanne) --- */
+  --paper: #eef0f4;
+  --paper-2: #e6e9f0;
+  --surface: #fbfbfd;
+  --ink: #14131f;
+  --ink-deep: #0d0c16;
+  --gres: #6f6d82;
+  --gres-soft: #a5a3b8;
+
+  /* ---- Color · accent (fulgur : doré électrique, l'éclair de Foudre IA) - */
+  --fulgur: #c6891f;
+  --fulgur-deep: #9c6c16;
+  --fulgur-soft: #ddab5c;
+  --fulgur-wash: #f5ecd8;
+
+  /* ---- Color · lines & borders (aucune ombre permise) ------------------ */
+  --line: rgba(20, 19, 31, 0.12);
+  --line-strong: rgba(20, 19, 31, 0.22);
+  --line-dark: rgba(255, 255, 255, 0.14);
+
+  /* ---- Color · status (sobre, dosé) ----------------------------------- */
+  --ok: #3f6b4f;
+  --warn: var(--fulgur);
+
+  /* ---- Typography · familles (auto-hébergées via next/font) ------------ */
+  --serif: var(--font-spectral), Georgia, "Times New Roman", serif;
+  --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+
+  /* ---- Typography · échelle fluide (clamp mobile -> desktop) ----------- */
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4rem);
+  --fs-h1: clamp(2.1rem, 1.5rem + 2.4vw, 3.25rem);
+  --fs-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  --fs-h3: clamp(1.25rem, 1.05rem + 0.7vw, 1.5rem);
+  --fs-lead: clamp(1.1rem, 1.0rem + 0.5vw, 1.25rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-eyebrow: 0.8125rem;
+  --fs-tag: 0.78125rem;
+
+  /* ---- Typography · graisses ------------------------------------------ */
+  --fw-reg: 400;
+  --fw-med: 500;
+  --fw-semi: 600;
+  --fw-bold: 700;
+
+  /* ---- Typography · interlignage & tracking --------------------------- */
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-normal: 1.55;
+  --lh-loose: 1.65;
+  --tr-tight: -0.01em;
+  --tr-eyebrow: 0.08em;
+  --tr-caps: 0.14em;
+
+  /* ---- Spacing · base 4px --------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+  --section-y: clamp(64px, 7vw, 112px);
+  --gutter: clamp(20px, 5vw, 56px);
+  --maxw: 1200px;
+
+  /* ---- Radii (jamais de pill sur une carte) --------------------------- */
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 999px;
+
+  /* ---- Élévation : AUCUNE ombre. Bordure + surface uniquement. --------- */
+  --elev-card: 1px solid var(--line);
+  --elev-raised: 1px solid var(--line-strong);
+
+  /* ---- Motion (sobre : fondus + petite translation, aucun rebond) ------ */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* ===========================================================================
+   Base
+   ========================================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  font: inherit;
+}
+
+/* Focus visible (WCAG 2.2 AA) : anneau fulgur net au clavier */
+:focus-visible {
+  outline: 2px solid var(--fulgur);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Lien d'évitement */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink-deep);
+  color: var(--paper);
+  padding: 12px 18px;
+  border-radius: 0 0 var(--r-md) 0;
+  font-size: 14px;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ===========================================================================
+   Typographie sémantique
+   ========================================================================= */
+.ia-display {
+  font-family: var(--serif);
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-display);
+  line-height: 1.2;
+  letter-spacing: var(--tr-tight);
+  color: var(--ink);
+}
+.ia-h1 {
+  font-family: var(--serif);
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-h1);
+  line-height: 1.18;
+  letter-spacing: var(--tr-tight);
+  color: var(--ink);
+}
+.ia-h2 {
+  font-family: var(--serif);
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  color: var(--ink);
+}
+.ia-h3 {
+  font-family: var(--sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-tight);
+  color: var(--ink);
+}
+.ia-lead {
+  font-family: var(--sans);
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-normal);
+  color: var(--gres);
+}
+.ia-body {
+  font-family: var(--sans);
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--ink);
+}
+.ia-small {
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  line-height: var(--lh-normal);
+  color: var(--gres);
+}
+.ia-eyebrow {
+  font-family: var(--mono);
+  font-weight: var(--fw-med);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tr-eyebrow);
+  text-transform: uppercase;
+  color: var(--fulgur-deep);
+}
+.ia-tag {
+  font-family: var(--mono);
+  font-weight: var(--fw-med);
+  font-size: var(--fs-tag);
+  color: var(--gres);
+}
+.ia-accent {
+  color: var(--fulgur-deep);
+  font-style: italic;
+}
+.ia-link {
+  color: var(--fulgur-deep);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color var(--dur) var(--ease);
+}
+.ia-link:hover {
+  color: var(--ink);
+}
+
+/* ===========================================================================
+   Layout
+   ========================================================================= */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+.section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+.section--alt {
+  background: var(--paper-2);
+}
+.section--dark {
+  background: var(--ink-deep);
+  color: var(--paper);
+}
+
+/* ===========================================================================
+   Boutons
+   ========================================================================= */
+.ia-btn {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: var(--r-md);
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+.ia-btn:active {
+  transform: translateY(0.5px);
+}
+.ia-btn--p {
+  background: var(--fulgur);
+  color: #14131f;
+}
+.ia-btn--p:hover {
+  background: var(--fulgur-deep);
+  color: #fff;
+}
+.ia-btn--s {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.ia-btn--s:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.ia-btn--g {
+  background: transparent;
+  color: var(--fulgur-deep);
+  border-color: var(--line-strong);
+}
+.ia-btn--g:hover {
+  border-color: var(--fulgur);
+  background: var(--fulgur-wash);
+}
+.ia-btn--dark {
+  background: var(--fulgur-soft);
+  color: var(--ink-deep);
+}
+.ia-btn--dark:hover {
+  background: #e8bd7c;
+}
+.ia-btn--ghostdark {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--line-dark);
+}
+.ia-btn--ghostdark:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.ia-btn--sm {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+.ia-btn[disabled],
+.ia-btn[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===========================================================================
+   Chips & tags
+   ========================================================================= */
+.ia-chip {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--gres);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 7px 11px;
+  background: var(--surface);
+}
+.ia-filter {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--r-pill);
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease),
+    border-color var(--dur);
+}
+.ia-filter:hover {
+  border-color: var(--ink);
+}
+.ia-filter--on {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ===========================================================================
+   Cartes
+   ========================================================================= */
+.ia-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+.ia-card--raised {
+  border-color: var(--line-strong);
+}
+.ia-card--feature {
+  border: 1.5px solid var(--fulgur);
+}
+
+/* ===========================================================================
+   Nav
+   ========================================================================= */
+.ia-navlink {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  opacity: 0.82;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--dur), color var(--dur);
+  background: none;
+  border: none;
+  white-space: nowrap;
+}
+.ia-navlink:hover {
+  opacity: 1;
+  color: var(--fulgur-deep);
+}
+.ia-navlink--on {
+  opacity: 1;
+  color: var(--fulgur-deep);
+}
+
+/* ===========================================================================
+   Liens fléchés
+   ========================================================================= */
+a.ia-arrow {
+  color: var(--fulgur-deep);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: gap var(--dur) var(--ease), color var(--dur);
+}
+a.ia-arrow:hover {
+  gap: 10px;
+  color: var(--ink);
+}
+
+/* ===========================================================================
+   Champs
+   ========================================================================= */
+.ia-field {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  padding: 11px 13px;
+  width: 100%;
+  transition: border-color var(--dur) var(--ease);
+}
+.ia-field:focus {
+  outline: none;
+  border-color: var(--fulgur);
+}
+.ia-label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+.ia-drop {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  padding: 22px;
+  text-align: center;
+  background: var(--surface);
+  cursor: pointer;
+  color: var(--gres);
+  transition: border-color var(--dur), background var(--dur);
+}
+.ia-drop:hover {
+  border-color: var(--fulgur);
+  background: var(--fulgur-wash);
+}
+
+/* ===========================================================================
+   Accordéon
+   ========================================================================= */
+.ia-acc-item {
+  border-bottom: 1px solid var(--line);
+}
+.ia-acc-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink);
+}
+.ia-acc-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--dur-slow) var(--ease);
+}
+.ia-acc-panel-inner {
+  padding: 0 2px 18px;
+  color: var(--gres);
+  font-size: 15.5px;
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+/* ===========================================================================
+   Grilles responsives. Les composants posent leur ratio via --cols (inline) ;
+   les media queries plus bas effondrent. Points de rupture : 1000px, 920px, 640px.
+   ========================================================================= */
+.grid {
+  display: grid;
+}
+.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.split {
+  grid-template-columns: var(--cols, 1fr 1fr);
+}
+
+@media (max-width: 1000px) {
+  .cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .split--imgfirst > .split-img {
+    order: 2;
+  }
+}
+@media (max-width: 640px) {
+  .cols-2,
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bandes de tuiles : supprime les bordures droites internes au repli */
+@media (max-width: 1000px) {
+  .strip-cell {
+    border-right: none !important;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ===========================================================================
+   Header : nav desktop vs menu mobile
+   ========================================================================= */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  padding: 8px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: 920px) {
+  .nav-desktop {
+    display: none;
+  }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-mobile {
+    display: block;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .nav-mobile .ia-navlink {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px var(--gutter);
+    border-bottom: 1px solid var(--line);
+    opacity: 1;
+    font-size: 16px;
+  }
+  .nav-mobile .nav-mobile-cta {
+    padding: 16px var(--gutter);
+  }
+}
+
+/* ===========================================================================
+   Footer responsive
+   ========================================================================= */
+.footer-grid {
+  grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+}
+@media (max-width: 1000px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 36px !important;
+  }
+}
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards-3 {
+  grid-template-columns: 1fr 1.15fr 1fr;
+}
+@media (max-width: 1000px) {
+  .cards-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Réduit le rythme vertical du hero sur mobile */
+@media (max-width: 640px) {
+  .hero-pad {
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+  }
+}
+
+/* ===========================================================================
+   Mouvement : respecte prefers-reduced-motion
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
